@@ -1,5 +1,5 @@
 const PORT = 8000
-const axios = require("axios");
+const axios = require("axios").default
 const express = require("express")
 const cors = require("cors")
 require('dotenv').config()
@@ -19,10 +19,10 @@ app.get('/word', (req, res) => {
         }
     }
 
-    axios.request(options).then(function (response) {
+    axios.request(options).then((response) => {
 	    console.log(response.data);
         res.json(response.data[0])
-    }).catch(function (error) {
+    }).catch((error) => {
 	    console.error(error);
     })
 })

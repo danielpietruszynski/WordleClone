@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: #121213;
 }
 
 .game-container {
@@ -22,7 +22,7 @@ body {
     border-bottom: solid 1px #3a3a3c;
 }
 
-.title-container {
+.tile-container {
     width: 330px;
     margin-bottom: 30px;
 }
