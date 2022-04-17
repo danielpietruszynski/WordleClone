@@ -79,19 +79,21 @@ keys.forEach(key => {
 })
 
 const handleClick = (letter) => {
-    console.log('clicked', letter)
-    if (letter === '«') {
-        deleteLetter()
+    if (!isGameOver) {
+        console.log('clicked', letter)
+        if (letter === '«') {
+            deleteLetter()
+            console.log('guessRows', guessRows)
+            return
+        }
+        if (letter === 'ENTER') {
+            checkRow()
+            console.log('guessRows', guessRows)
+            return
+        }
+        addLetter(letter)
         console.log('guessRows', guessRows)
-        return
     }
-    if (letter === 'ENTER') {
-        checkRow()
-        console.log('guessRows', guessRows)
-        return
-    }
-    addLetter(letter)
-    console.log('guessRows', guessRows)
 }
 
 const addLetter = (letter) => {
@@ -116,25 +118,36 @@ const deleteLetter = () => {
 
 const checkRow = () => {
     const guess = guessRows[currentRow].join('')
+    console.log('guess', guess)
     
     if (currentTile > 4) {  
-        console.log('guess is ' + guess, 'wordle is ' + wordle)
-        flipTile()
-        if (wordle == guess) {
-            showMessage('Congratulation!')
-            isGameOver = true
-            return
-        } else {
-            if (currentRow >= 5) {
-                isGameOver = true
-                showMessage('Game Over!')
-                return
-            }
-            if (currentRow < 5) {
-                currentRow++
-                currentTile = 0
-            }
-        }
+        fetch(`http://localhost:8000/check/?word=${guess}`)
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+                if (json == 'Entry word not found') {
+                    showMessage('word not in list')
+                    return
+                } else {
+                    console.log('guess is ' + guess, 'wordle is ' + wordle)
+                    flipTile()
+                    if (wordle == guess) {
+                        showMessage('Congratulation!')
+                        isGameOver = true
+                        return
+                    } else {
+                        if (currentRow >= 5) {
+                            isGameOver = true
+                            showMessage('Game Over!')       
+                            return
+                        }
+                        if (currentRow < 5) {
+                            currentRow++
+                            currentTile = 0
+                        }
+                    }
+                }
+            }).catch(err => console.log(err))
     }
 }
 
