@@ -15,7 +15,7 @@ Dzięki wykorzystaniu Random Word API losowane jest jedno pięcioliterowe słowo
 Po podaniu przez niego słowa gra wykorzystując Dictionary API sprawdza czy słowo istnieje.
 Następnie zgodnie z zasadami gry, każda litera w słowie podanym przez użytkownika zostaje podświetlona na jeden z przypisanych kolorów (zielony - litera znajduje się na dobrym miejscu,
 żółty - litera znajduje się w wylosowanym słowie, ale w innym miejscu, szary - litery nie ma w wylosowanym słowie). 
-Użytkownik wygrywa w momencie odgadnięcia wylosowanego przez grę słowa przed osiągnięciem limitu dostępnych rzędów.
+Użytkownik wygrywa w momencie odgadnięcia wylosowanego przez grę słowa przed osiągnięciem limitu dostępnych prób.
 
 
 ## Status projektu
